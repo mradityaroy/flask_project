@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 from app import db
 import uuid
-
+import random
 class User:
 
     def start_session(self, user):
@@ -13,9 +13,10 @@ class User:
 
     def signup(self):
 
+        secret_id = str(random.randint(101, 999))
         user = {
             # "_id": uuid.uuid4().hex,
-            "_id": request.form.get('name')+"2203",
+            "_id": request.form.get('name')+secret_id,
             "name": request.form.get('name'),
             "email": request.form.get('email'),
             "password": request.form.get('password')
