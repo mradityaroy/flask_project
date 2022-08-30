@@ -11,14 +11,15 @@ app.secret_key = b'\xe5\xf1!\xde`\xf2\xd2vCh\xeeZ\xb5\x02\x02.'
 
 
 # Database
-# client = pymongo.MongoClient(r"mongodb+srv://aditya:Adi8877@cluster0.wjpj2.mongodb.net/?retryWrites=true&w=majority")
-client = pymongo.MongoClient(host='test_mongodb',
-                        port=27017, 
-                        username='root', 
-                        password='pass',
-                        authSource="admin")
+client = pymongo.MongoClient(r"mongodb+srv://aditya:Adi8877@cluster0.wjpj2.mongodb.net/?retryWrites=true")
+# client = pymongo.MongoClient(host='mongo-connecting-service',
+#                         port=27017, 
+#                         username='username', 
+#                         password='password',
+#                         authSource="admin")
 
 db = client.user_login_system
+# db = "try"
 
 # Decorators
 
@@ -45,3 +46,6 @@ def home():
 def dashboard():
     return render_template('dashboard.html')
 
+
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', debug=True)
