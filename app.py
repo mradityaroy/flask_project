@@ -2,8 +2,10 @@ from functools import wraps
 from http import client
 from pydoc import cli
 from functools import wraps
+import socket
 from flask import Flask, render_template, session, redirect
 import pymongo
+import os
 
 
 app = Flask(__name__)
@@ -11,15 +13,21 @@ app.secret_key = b'\xe5\xf1!\xde`\xf2\xd2vCh\xeeZ\xb5\x02\x02.'
 
 
 # Database
-client = pymongo.MongoClient(r"mongodb+srv://aditya:Adi8877@cluster0.wjpj2.mongodb.net/?retryWrites=true")
-# client = pymongo.MongoClient(host='mongo-connecting-service',
-#                         port=27017, 
-#                         username='username', 
-#                         password='password',
-#                         authSource="admin")
+# client = pymongo.MongoClient(r"mongodb+srv://aditya:Adi8877@cluster0.wjpj2.mongodb.net/?retryWrites=true")
 
-db = client.user_login_system
-# db = "try"
+uri = "mongodb://"+"mongodb-service"+":"+str(27017)
+client = pymongo.MongoClient(uri)
+database = client['user_login_system']
+collection = database['users']
+# client = pymongo.MongoClient("mongodb://"+os.environ["MONGODB_SERVICE_PORT"],
+#                             username=os.environ["MONGO_INITDB_ROOT_USERNAME"],
+#                             password=os.environ["MONGO_INITDB_ROOT_PASSWORD"],
+#                             authSource="admin"
+#                             )
+
+
+# db = client.user_login_system
+db = database
 
 # Decorators
 
